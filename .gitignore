@@ -2,5 +2,5 @@
 target
 tweet_input/*
 tweet_output/*
-project
+project/*
 data
