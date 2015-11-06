@@ -61,26 +61,6 @@ class HashtagGraphAnalyzer(
 object HashtagGraphAnalyzer {
   val windowLengthSeconds = 30
   def apply(sink: Sink): HashtagGraphAnalyzer = new HashtagGraphAnalyzer(sink, timeWindow = TimeWindow(windowLengthSeconds))
-//  val formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")
-//
-//  val datePrefix = "2015-06-05 20:00:"
-//
-//  val hg = new HashtagGraphAnalyzer(Sink("data/feat2.txt"), timeWindow = new TimeWindow(5))
-//
-//  def run = {
-//    val t0 = new Tweet(formatter.parseDateTime(datePrefix + "00"), "Text", List[Hashtag]())                                               // 0.0
-//    val t1 = new Tweet(formatter.parseDateTime(datePrefix + "00"), "Text", List[Hashtag](Hashtag("a"), Hashtag("b")))                     // 1.0
-//    val t2 = new Tweet(formatter.parseDateTime(datePrefix + "01"), "Text", List[Hashtag](Hashtag("a")))                                   // 1.0
-//    val t3 = new Tweet(formatter.parseDateTime(datePrefix + "02"), "Text", List[Hashtag](Hashtag("b"), Hashtag("A"), Hashtag("c")))       // 2.0
-//    val t4 = new Tweet(formatter.parseDateTime(datePrefix + "03"), "Text", List[Hashtag](Hashtag("b"), Hashtag("d")))                     // 2.0
-//    val t5 = new Tweet(formatter.parseDateTime(datePrefix + "03"), "Text", List[Hashtag]())                                               // 2.0
-//    val t6 = new Tweet(formatter.parseDateTime(datePrefix + "06"), "Text", List[Hashtag](Hashtag("e"), Hashtag("G")))                     //
-//    val t7 = new Tweet(formatter.parseDateTime(datePrefix + "20"), "Text", List[Hashtag](Hashtag("e"), Hashtag("A"), Hashtag("c")))       //
-//
-//    val list = List(t0, t1, t2, t3, t4, t5, t6, t7)
-//
-//    list.foldLeft(hg)((w, t) => w.process(t)).terminate
-//  }
 }
 
 
