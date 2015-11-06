@@ -1,7 +1,7 @@
 .DS_Store
-.idea
-target
-tweet_input/*
-tweet_output/*
-project/*
-data
+/.idea
+/target
+/tweet_input/*
+/tweet_output/*
+/project/*
+/data
