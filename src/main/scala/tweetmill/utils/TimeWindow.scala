@@ -24,7 +24,7 @@ case class TimeWindow(
       windowEnd: DateTime,
       prelimWindow: List[Tweet]): (List[Tweet], List[Tweet]) = {
 
-    prelimWindow.partition(tweet => tweet.createdAt.isAfter(windowEnd))
+    prelimWindow.partition(tweet => tweet.createdAt.isAfter(windowEnd) || tweet.createdAt.equals(windowEnd))
   }
 
   private[this] def insert(tweet: Tweet): List[Tweet] = {
