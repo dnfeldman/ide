@@ -1,2 +1,6 @@
-/.idea
-/target
+.idea
+target
+tweet_input/*
+tweet_output/*
+project
+data

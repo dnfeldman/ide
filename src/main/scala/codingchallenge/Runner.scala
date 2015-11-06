@@ -1,23 +1,16 @@
 package codingchallenge
 
-import codingchallenge.processors.{UnicodeCleaner, TweetProcessor}
+import codingchallenge.processors.{HashtagGraph, UnicodeCleaner}
 
-class Runner(processors: List[TweetProcessor]) {
-  val tweetSource = new TweetSource("data/test.txt")
+object Runner extends App {
+  val processors = List(
+    UnicodeCleaner(Sink("tweet_output/ft1.txt")),
+    HashtagGraph(Sink("tweet_output/ft2.txt"))
+  )
 
-  def run = {
-    tweetSource.validTweets
-        .foldLeft(StreamManager(processors))((streamManager, tweet) => streamManager.processTweet(tweet))
-        .terminate
-  }
+  val tweetSource = new TweetSource("data/tweets.txt")
 
-
-}
-
-
-object Runner {
-  val processors = List(UnicodeCleaner(Sink("data/output.txt")))
-  val runner = new Runner(processors)
-
-  def run = runner.run
+  tweetSource.validTweets
+      .foldLeft(StreamManager(processors))((streamManager, tweet) => streamManager.processTweet(tweet))
+      .terminate
 }
