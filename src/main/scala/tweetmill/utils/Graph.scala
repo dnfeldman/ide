@@ -35,11 +35,14 @@ case class Graph(
       case false => edge.nodes.foldLeft(nodeDegrees)((nd, hashtag) => decrementCounter[Hashtag](nd, hashtag))
     }
 
-    val newTotalNodes: Long = totalNodes -
-        (if(newNodeDegrees.isDefinedAt(edge.node1)) 0L else 1L) -
-        (if(newNodeDegrees.isDefinedAt(edge.node2)) 0L else 1L)
+    val newTotalNodes: Long = if(totalNodes == 0) { 0 } else {
+      totalNodes -
+        (if (newNodeDegrees.isDefinedAt(edge.node1)) 0L else 1L) -
+        (if (newNodeDegrees.isDefinedAt(edge.node2)) 0L else 1L) }
 
-    val newTotalDegrees: Long = totalDegrees - (if (justRemoved(newEdgeCounts, edge)) 2L else 0L)
+    val newTotalDegrees: Long = if(totalDegrees == 0) { 0 } else {
+      totalDegrees - (if (justRemoved(newEdgeCounts, edge)) 2L else 0L)
+    }
 
     Graph(newEdgeCounts, newNodeDegrees, newTotalNodes, newTotalDegrees)
   }
