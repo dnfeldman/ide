@@ -5,3 +5,7 @@ Despite being quite new to Scala (~2 months of on and off work), I decided to ta
 With that in mind, here is how I've approached the problem.
 
 First order of business was to abstract away data input and output. Data can be coming from a file or a stream or something else and, similarly, could be written to a file or S3 or maybe even persisted in memory for further use. None of that should affecte internal logic, so I've added `Source` and `Sink`. The process then is to take a `Tweet` from `Source` and send it off to all consumers, each of which will perform a series of operations on it and store the output to its respective `Sink`.
+
+
+### Visual Overview 
+![alt tag](public/images/ide.png)
