@@ -13,7 +13,7 @@ object Process extends App {
 
   val tweetSource = new Source(params("source"))
 
-  tweetSource.validTweets
+  tweetSource.validTweets()
       .foldLeft(new StreamManager(processors))((streamManager, tweet) => streamManager.processTweet(tweet))
       .terminate
 

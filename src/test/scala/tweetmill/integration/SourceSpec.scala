@@ -13,7 +13,7 @@ class SourceSpec extends FunSpec with GivenWhenThen with HelperMethods {
     it("should process input strings into tweets") {
       When("given a source of tweets")
       val source = new Source(filename)
-      val validTweets = source.validTweets.toList // make a list instead of iterator to make it reusable
+      val validTweets = source.validTweets().toList // make a list instead of iterator to make it reusable
 
       Then("ignores malformed lines that cannot be converted into a Tweet")
 

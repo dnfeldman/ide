@@ -5,11 +5,17 @@ import org.joda.time.format.DateTimeFormat
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
+import scala.collection.immutable.Stream.Empty
 import scala.util.Try
 
 class Source(filename: String) {
-  val tweets = scala.io.Source.fromFile(filename).getLines().map(line => extractTweet(line))
-  val validTweets = tweets.collect { case tweetExtract: Try[Tweet] if tweetExtract.isSuccess => tweetExtract.get }
+  val tweets = scala.io.Source.fromFile(filename).getLines().toStream
+
+  def validTweets(stream: Stream[String] = tweets): Stream[Tweet] = {
+    if (stream.isEmpty) Empty
+    else if (extractTweet(stream.head).isSuccess) extractTweet(stream.head).get #:: validTweets(stream.tail)
+    else validTweets(stream.tail)
+  }
 
   val timeFormatter = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss Z yyyy")
   implicit val formats = DefaultFormats // for json4s
