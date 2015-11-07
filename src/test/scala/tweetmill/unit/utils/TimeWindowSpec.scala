@@ -1,13 +1,10 @@
 package tweetmill.unit.utils
 
-import org.scalamock.scalatest.MockFactory
 import org.scalatest.{GivenWhenThen, FunSpec}
 import tweetmill.HelperMethods
 import tweetmill.utils.TimeWindow
 
-class TimeWindowSpec extends FunSpec with GivenWhenThen with MockFactory with HelperMethods {
-
-  val windowLength = 5 // seconds
+class TimeWindowSpec extends FunSpec with GivenWhenThen with HelperMethods {
 
   val tweet0 = makeTweet(arrivalSecond = "00")
   val tweet1 = makeTweet(arrivalSecond = "00")
@@ -16,6 +13,8 @@ class TimeWindowSpec extends FunSpec with GivenWhenThen with MockFactory with He
   val tweet4 = makeTweet(arrivalSecond = "06")
   
   describe("TimeWindow") {
+    val windowLength = 5 // seconds
+
     it("should allow an empty window to be instantiated"){
       Given("an empty TimeWindow")
       val timeWindow = new TimeWindow(lengthInSeconds = windowLength)

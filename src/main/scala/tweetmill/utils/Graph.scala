@@ -1,7 +1,6 @@
 package tweetmill.utils
 
 import tweetmill.Hashtag
-
 import scala.collection.immutable.HashMap
 
 case class Graph(
@@ -46,7 +45,6 @@ case class Graph(
 
     Graph(newEdgeCounts, newNodeDegrees, newTotalNodes, newTotalDegrees)
   }
-
 
   private[this] def incrementCounter[T](hashMap: HashMap[T, Long], key: T): HashMap[T, Long] = {
     hashMap + (key -> (hashMap.getOrElse(key, 0L) + 1L))

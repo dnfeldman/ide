@@ -1,16 +1,18 @@
 package tweetmill.processors
 
+import org.joda.time.format.DateTimeFormat
 import tweetmill.{Sink, Tweet}
 
-class UnicodeCleaner(sink: Sink, tweetsWithUnicode: Int = 0) extends Processable {
+class UnicodeCleaner(val sink: Sink, val tweetsWithUnicode: Long = 0L) extends Processable {
 
   def process(tweet: Tweet): UnicodeCleaner = {
     val originalText = tweet.text
     val cleanText = removeUnicode(originalText)
 
-    val newTweetsWithUnicode = if (isSameLength(originalText, cleanText)) 1 else 0
+    val newTweetsWithUnicode = if (isSameLength(originalText, cleanText)) 0L else 1L
 
-    val entry = cleanText + " (timestamp: " + tweet.createdAt + ")"
+    val formatter = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss Z yyyy").withZoneUTC()
+    val entry = cleanText + " (timestamp: " + formatter.print(tweet.createdAt) + ")"
 
     new UnicodeCleaner(sink.put(entry), tweetsWithUnicode + newTweetsWithUnicode)
   }

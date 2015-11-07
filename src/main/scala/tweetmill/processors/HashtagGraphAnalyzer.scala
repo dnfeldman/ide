@@ -2,18 +2,14 @@ package tweetmill.processors
 
 import tweetmill.utils.{Graph, Edge, TimeWindow}
 import tweetmill.{Hashtag, Sink, Tweet}
-import org.joda.time.format.DateTimeFormat
-
-import scala.collection.immutable.HashMap
-
 
 class HashtagGraphAnalyzer(
-    sink: Sink,
+    val sink: Sink,
     timeWindow: TimeWindow,
     hashtagGraph: Graph = Graph()
 ) extends Processable {
-  def process(tweet: Tweet): HashtagGraphAnalyzer = {
 
+  def process(tweet: Tweet): HashtagGraphAnalyzer = {
     val newTimeWindow = timeWindow.add(tweet)
     val newHashtagGraph = updateHashtagGraph(newTimeWindow)
     val averageDegree: String = "%.2f".format(newHashtagGraph.averageDegree) // 2 decimal places
@@ -50,7 +46,7 @@ class HashtagGraphAnalyzer(
     extractEdges(hashtags)
   }
 
-  private[this] def extractUniqueHashtags(tweet: Tweet): List[Hashtag] = tweet.hashtags.toSet.toList
+  private[this] def extractUniqueHashtags(tweet: Tweet): List[Hashtag] = tweet.hashtags.distinct
   private[this] def extractEdges(hashtags: List[Hashtag]): List[Edge] = {
     hashtags.combinations(2).map(combo => createEdgeFrom(combo)).toList
   }

@@ -1,13 +1,12 @@
 package tweetmill.unit.utils
 
-import org.scalamock.scalatest.MockFactory
 import org.scalatest.{GivenWhenThen, FunSpec}
 import tweetmill.{Hashtag, HelperMethods}
 import tweetmill.utils.{Edge, Graph}
 
 import scala.collection.immutable.HashMap
 
-class GraphSpec extends FunSpec with GivenWhenThen with MockFactory with HelperMethods {
+class GraphSpec extends FunSpec with GivenWhenThen with HelperMethods {
 
   describe("Graph") {
 
