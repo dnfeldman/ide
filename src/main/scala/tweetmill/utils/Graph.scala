@@ -11,6 +11,13 @@ case class Graph(
 
   val averageDegree: Double = if (totalNodes == 0) 0 else totalDegrees / totalNodes.toDouble
 
+  /** Adds an edge to the existing graph by incrementing number of occurrences of the given edge,
+    * updating node degrees from edge's nodes if necessary, as well as updating the totals for unique
+    * nodes and connections (to calculate average graph's average degree)
+    *
+    * @param edge edge to be added
+    * @return a new instance of Graph containing the edge given
+    */
   def addEdge(edge: Edge): Graph = {
     val newEdgeCounts: HashMap[Edge, Long] = incrementCounter[Edge](edgeCounts, edge)
     val newNodeDegrees: HashMap[Hashtag, Long] = needToUpdateNodeDegrees(edge) match {
@@ -27,6 +34,13 @@ case class Graph(
     Graph(newEdgeCounts, newNodeDegrees, newTotalNodes, newTotalDegrees)
   }
 
+  /** Removes an edge from the existing graph by decrementing number of occurrences of the given edge,
+    * updating node degrees from edge's nodes if necessary, as well as updating the totals for unique
+    * nodes and connections (to calculate average graph's average degree)
+    *
+    * @param edge edge to be removed
+    * @return a new instance of Graph without the edge given
+    */
   def removeEdge(edge: Edge): Graph = {
     val newEdgeCounts: HashMap[Edge, Long] = decrementCounter[Edge](edgeCounts, edge)
     val newNodeDegrees: HashMap[Hashtag, Long] = newEdgeCounts.isDefinedAt(edge) match {
